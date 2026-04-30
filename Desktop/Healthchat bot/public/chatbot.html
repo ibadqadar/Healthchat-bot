@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot | Health Assistant</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS for grid/reset -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-light">
+
+    <!-- Header / Navbar specific to Chat -->
+    <header class="chat-header">
+        <div class="container d-flex align-items-center justify-content-between px-0">
+            <div class="chat-header-info">
+                <a href="/" class="btn btn-light rounded-circle shadow-sm border" title="Back to Home" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fa-solid fa-house text-muted"></i>
+                </a>
+                <div class="chat-header-icon">
+                    <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <div>
+                    <h1 class="h5 mb-0 fw-bold">AWKUM Health Assistant</h1>
+                    <p class="small text-muted mb-0 fw-medium d-flex align-items-center gap-2">
+                        <span class="chat-status-dot"></span>
+                        AI Powered by Gemini
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Links for consistency -->
+            <div class="d-none d-md-flex gap-3">
+                <a href="/map.html" class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-medium">Find Hospital</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Chat Application Container -->
+    <div class="chat-app-container container px-0 px-md-3">
+        <!-- Messages Area -->
+        <main class="chat-messages-container scrollbar-none" id="chatContainer">
+            <div class="mx-auto" style="max-width: 800px;" id="messagesArea">
+                
+                <!-- Initial Welcome Message -->
+                <div class="chat-message-row bot">
+                    <div class="chat-bubble-wrapper">
+                        <div class="chat-avatar bot">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="chat-bubble bot">
+                            Hello! I am the AWKUM Health Assistant. How can I help you today? You can ask me health-related questions or upload an image of a medication packaging to identify it.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Input Area -->
+        <footer class="chat-input-wrapper">
+            <div class="mx-auto" style="max-width: 800px;">
+                <div class="chat-input-box shadow-sm">
+                    
+                    <input type="file" id="fileInput" accept="image/*" class="d-none" />
+                    
+                    <div class="dropdown dropup">
+                        <button id="uploadBtn" class="chat-action-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Upload Medicine Image">
+                            <i class="fa-solid fa-paperclip fs-5"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-start shadow-lg border-0 rounded-3 mb-2" style="min-width: 200px;">
+                            <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" href="#" id="menuCameraBtn" data-bs-toggle="modal" data-bs-target="#cameraModal"><i class="fa-solid fa-camera text-primary" style="width: 20px;"></i> Camera</a></li>
+                            <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" href="#" id="menuUploadBtn"><i class="fa-regular fa-image text-secondary" style="width: 20px;"></i> Upload Image</a></li>
+                        </ul>
+                    </div>
+
+                    <textarea id="userInput" placeholder="Ask a health question or describe symptoms..." class="chat-textarea scrollbar-none" rows="1"></textarea>
+                    
+                    <button id="sendBtn" class="chat-action-btn chat-send-btn" disabled>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+                <p class="text-center small text-muted mt-2 mb-0" style="font-size: 0.75rem;">
+                    Information provided is for educational purposes and should not replace professional medical advice.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Camera Modal -->
+    <div class="modal fade" id="cameraModal" tabindex="-1" aria-labelledby="cameraModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="modal-header border-0 bg-light pb-2">
+                    <h5 class="modal-title fw-bold" id="cameraModalLabel"><i class="fa-solid fa-camera text-primary me-2"></i> Take a Photo</h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0 position-relative bg-dark d-flex align-items-center justify-content-center" style="min-height: 300px;">
+                    <video id="cameraStream" autoplay playsinline class="w-100" style="max-height: 60vh; object-fit: cover;"></video>
+                    <div id="cameraLoading" class="position-absolute text-white d-flex flex-column align-items-center">
+                        <div class="spinner-border text-primary mb-2" role="status"></div>
+                        <span>Accessing camera...</span>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 bg-light justify-content-center py-3">
+                    <button type="button" class="btn btn-primary-custom rounded-pill px-4 d-flex align-items-center gap-2" id="capturePhotoBtn">
+                        <i class="fa-solid fa-camera"></i> Capture Photo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <canvas id="cameraCanvas" class="d-none"></canvas>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>
