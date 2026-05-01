@@ -142,10 +142,4 @@ The application will be running at `http://localhost:5000`.
 
 ---
 
-## 📚 Final Year Project Demo Tips
-- Run `node seed.js` so you have robust database matches for the chatbot fallback.
-- Test the chatbot by asking "What is a fever?"
-- In the Map UI, allow location permissions to see nearby medical facilities.
-- For the Medicine Scanner, use an image of "Paracetamol" to test the OCR functionality.
 
-**Good luck with your presentation!**
