@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Health Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <div
+                    class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-3 p-2 me-2">
+                    <i class="fa-solid fa-notes-medical" style="color: var(--primary-color);"></i>
+                </div>
+                Salvia AI
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars fs-4 text-primary"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/chatbot.html">AI Chat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/map.html">Find Hospitals</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/about.html">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 flex-grow-1">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="glass-card p-4 p-md-5">
+                    <h2 class="fw-bolder mb-3 text-gradient">About the Project</h2>
+                    <p class="lead text-muted fs-5">A comprehensive project aiming to make basic healthcare information
+                        more accessible using Artificial Intelligence.</p>
+
+                    <hr class="my-5" style="opacity: 0.1;">
+
+                    <h4 class="fw-bold mb-4">Core Features</h4>
+                    <ul class="list-group list-group-flush mb-5 rounded-4 border overflow-hidden shadow-sm">
+                        <li class="list-group-item d-flex align-items-center gap-3 py-4 border-bottom-0">
+                            <div class="icon-box-primary mb-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <strong class="d-block mb-1">AI Chatbot</strong>
+                                <span class="text-muted">Processes natural language queries to return relevant health
+                                    FAQs and system capabilities.</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center gap-3 py-4 border-bottom-0 border-top">
+                            <div class="icon-box-success mb-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </div>
+                            <div>
+                                <strong class="d-block mb-1">Nearby Hospitals</strong>
+                                <span class="text-muted">Uses Geolocation combined with mapping APIs to locate nearby
+                                    healthcare facilities.</span>
+                            </div>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center gap-3 py-4 border-top">
+                            <div class="mb-0 d-inline-flex align-items-center justify-content-center"
+                                style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.2)); color: #d97706; width: 48px; height: 48px; border-radius: 16px; font-size: 1.25rem; box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);">
+                                <i class="fa-solid fa-pills"></i>
+                            </div>
+                            <div>
+                                <strong class="d-block mb-1">Medication OCR</strong>
+                                <span class="text-muted">Connects to Vision APIs to read text from uploaded medicine
+                                    images to provide precautions and uses.</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <h4 class="fw-bold mb-3">Datasets Used</h4>
+                    <p class="text-muted mb-5">Information in the chatbot and medicine database was curated from
+                        credible open sources such as the OpenFDA and WHO open datasets.</p>
+
+                    <h4 class="fw-bold mb-4">Tech Stack</h4>
+                    <div class="d-flex flex-wrap gap-2 mb-5">
+                        <span class="badge bg-slate-800 text-bg-dark px-3 py-2 rounded-pill fw-medium">Node.js</span>
+                        <span class="badge bg-slate-800 text-bg-dark px-3 py-2 rounded-pill fw-medium">Express</span>
+                        <span class="badge bg-slate-800 text-bg-dark px-3 py-2 rounded-pill fw-medium">MongoDB</span>
+                        <span class="badge bg-primary px-3 py-2 rounded-pill fw-medium">Google Gemini AI</span>
+                        <span class="badge text-bg-success px-3 py-2 rounded-pill fw-medium">OpenStreetMap API</span>
+                        <span class="badge text-bg-info text-white px-3 py-2 rounded-pill fw-medium">Vanilla CSS</span>
+                        <span class="badge text-bg-secondary px-3 py-2 rounded-pill fw-medium">Bootstrap 5</span>
+                    </div>
+
+                    <div class="alert alert-info mt-4 pb-3 border-0 shadow-sm"
+                        style="background-color: #eff6ff; color: #1d4ed8; border-left: 4px solid #2563eb !important;">
+                        <h5 class="alert-heading fw-bold mb-2"><i class="fa-solid fa-envelope me-2"></i> Contact</h5>
+                        <p class="mb-0">Developed for informational and academic purposes. Please read the disclaimer on
+                            any tools used.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="mb-0 fw-medium">&copy; 2026 Salvia AI</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker Registered!', reg))
+                    .catch(err => console.error('Service Worker Registration Failed!', err));
+            });
+        }
+    </script>
+</body>
+
+</html>

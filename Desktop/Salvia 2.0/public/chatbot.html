@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot | Health Assistant</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS for grid/reset -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+</head>
+
+<body class="d-flex flex-row" style="height: 100vh; overflow: hidden;">
+
+    <!-- Sidebar -->
+    <aside class="chat-sidebar border-end d-flex flex-column d-none d-md-flex" style="width: 280px; z-index: 1040;">
+        <div class="p-3 border-bottom d-flex align-items-center justify-content-between">
+            <a href="/" class="btn btn-light btn-sm rounded-circle shadow-sm border" title="Back to Home"
+                style="width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-house text-muted"></i>
+            </a>
+            <button id="newChatBtn"
+                class="btn btn-primary-custom btn-sm rounded-pill flex-grow-1 ms-2 d-flex align-items-center justify-content-center gap-2">
+                <i class="fa-solid fa-plus"></i> New Chat
+            </button>
+        </div>
+        <div class="flex-grow-1 overflow-auto p-2 scrollbar-none" id="chatHistoryList">
+            <!-- Dynamically populated chat list -->
+            <div class="text-center text-muted small mt-4 p-3" id="noChatsMsg">
+                No previous chats.
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="flex-grow-1 d-flex flex-column" style="height: 100vh;">
+        <!-- Header / Navbar specific to Chat -->
+        <header class="chat-header border-bottom" style="z-index: 10;">
+            <div class="container-fluid px-3 d-flex align-items-center justify-content-between">
+                <div class="chat-header-info d-flex align-items-center gap-3">
+                    <button class="btn btn-light border d-md-none rounded-2" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#sidebarOffcanvas">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="chat-header-icon shadow-sm" style="width: 40px; height: 40px; font-size: 1rem;">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <div>
+                        <h1 class="h6 mb-0 fw-bold">Salvia AI</h1>
+                        <p class="small text-muted mb-0 d-flex align-items-center gap-2" style="font-size: 0.75rem;">
+                            <span class="chat-status-dot"></span>
+                            Online
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Links for consistency -->
+                <div class="d-flex align-items-center gap-2">
+                    <button id="authBtn"
+                        class="btn btn-primary btn-sm rounded-pill px-3 fw-medium d-flex align-items-center gap-2 shadow-sm"
+                        data-bs-toggle="modal" data-bs-target="#authModal">
+                        <i class="fa-solid fa-user"></i> <span id="authBtnText">Login / Sign Up</span>
+                    </button>
+                    <button id="themeToggleBtn"
+                        class="btn btn-light btn-sm rounded-pill px-3 fw-medium d-flex align-items-center gap-2 shadow-sm"
+                        style="background: var(--bg-color); border: 1px solid var(--border-light); color: var(--text-main);">
+                        <i class="fa-solid fa-moon"></i> <span class="d-none d-sm-inline">Dark Mode</span>
+                    </button>
+                    <a href="/map.html" id="mapBtn"
+                        class="btn btn-outline-primary btn-sm rounded-pill px-3 fw-medium d-none d-sm-block">Find
+                        Hospital</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Application Container -->
+        <div class="chat-app-container flex-grow-1 d-flex flex-column position-relative"
+            style="min-height: 0; overflow: hidden;">
+            <!-- Messages Area -->
+            <main class="chat-messages-container scrollbar-none" id="chatContainer">
+                <div class="mx-auto" style="max-width: 800px;" id="messagesArea">
+
+                    <!-- Initial Welcome Message -->
+                    <div class="chat-message-row bot">
+                        <div class="chat-bubble-wrapper">
+                            <div class="chat-avatar bot">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div class="chat-bubble bot">
+                                Hello! I am Salvia AI. How can I help you today? You can ask me health-related questions
+                                or upload an image of a medication packaging to identify it.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+
+            <!-- Input Area -->
+            <footer class="chat-input-wrapper">
+                <div class="mx-auto" style="max-width: 800px;">
+                    <div class="chat-input-box shadow-sm">
+
+                        <input type="file" id="fileInput" accept="image/*" class="d-none" />
+
+                        <div class="dropdown dropup">
+                            <button id="uploadBtn" class="chat-action-btn" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" title="Upload Medicine Image">
+                                <i class="fa-solid fa-paperclip fs-5"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-start shadow-lg border-0 rounded-3 mb-2"
+                                style="min-width: 200px;">
+                                <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" href="#"
+                                        id="menuCameraBtn" data-bs-toggle="modal" data-bs-target="#cameraModal"><i
+                                            class="fa-solid fa-camera text-primary" style="width: 20px;"></i> Camera</a>
+                                </li>
+                                <li><a class="dropdown-item py-2 d-flex align-items-center gap-2" href="#"
+                                        id="menuUploadBtn"><i class="fa-regular fa-image text-secondary"
+                                            style="width: 20px;"></i> Upload Image</a></li>
+                            </ul>
+                        </div>
+
+                        <textarea id="userInput" placeholder="Ask a health question or describe symptoms..."
+                            class="chat-textarea scrollbar-none" rows="1"></textarea>
+
+                        <button id="sendBtn" class="chat-action-btn chat-send-btn" disabled>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="text-center small mt-2" style="font-size: 0.75rem; color: var(--text-muted);">
+                        AI can make mistakes. Check important info.
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- End Main Content Area -->
+
+        <!-- Mobile Offcanvas Sidebar -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" style="width: 280px;">
+            <div class="offcanvas-header border-bottom">
+                <h5 class="offcanvas-title fw-bold">Chat History</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-0 d-flex flex-column">
+                <div class="p-3 border-bottom">
+                    <button id="newChatBtnMobile"
+                        class="btn btn-primary-custom btn-sm rounded-pill w-100 d-flex align-items-center justify-content-center gap-2">
+                        <i class="fa-solid fa-plus"></i> New Chat
+                    </button>
+                </div>
+                <div class="flex-grow-1 overflow-auto p-2 scrollbar-none" id="chatHistoryListMobile">
+                    <!-- Mobile list populated via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Camera Modal -->
+        <div class="modal fade" id="cameraModal" tabindex="-1" aria-labelledby="cameraModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="modal-header border-0 bg-light pb-2">
+                        <h5 class="modal-title fw-bold" id="cameraModalLabel"><i
+                                class="fa-solid fa-camera text-primary me-2"></i> Take a Photo</h5>
+                        <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0 position-relative bg-dark d-flex align-items-center justify-content-center"
+                        style="min-height: 300px;">
+                        <video id="cameraStream" autoplay playsinline class="w-100"
+                            style="max-height: 60vh; object-fit: cover;"></video>
+                        <div id="cameraLoading"
+                            class="position-absolute text-white d-flex flex-column align-items-center">
+                            <div class="spinner-border text-primary mb-2" role="status"></div>
+                            <span>Accessing camera...</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0 bg-light justify-content-center py-3">
+                        <button type="button"
+                            class="btn btn-primary-custom rounded-pill px-4 d-flex align-items-center gap-2"
+                            id="capturePhotoBtn">
+                            <i class="fa-solid fa-camera"></i> Capture Photo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <canvas id="cameraCanvas" class="d-none"></canvas>
+
+        <!-- Auth Modal -->
+        <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="modal-header border-0 pb-0">
+                        <ul class="nav nav-pills w-100 nav-justified" id="authTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active rounded-pill fw-bold" id="login-tab" data-bs-toggle="tab"
+                                    data-bs-target="#login-pane" type="button" role="tab" aria-controls="login-pane"
+                                    aria-selected="true">Login</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link rounded-pill fw-bold" id="signup-tab" data-bs-toggle="tab"
+                                    data-bs-target="#signup-pane" type="button" role="tab" aria-controls="signup-pane"
+                                    aria-selected="false">Sign Up</button>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn-close position-absolute top-0 end-0 mt-3 me-3"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4 pt-3">
+                        <div class="tab-content" id="authTabContent">
+
+                            <!-- Login Form -->
+                            <div class="tab-pane fade show active" id="login-pane" role="tabpanel"
+                                aria-labelledby="login-tab">
+                                <form id="loginForm">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted small fw-bold">Email address</label>
+                                        <input type="email" class="form-control rounded-3 bg-light border-0 py-2"
+                                            id="loginEmail" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label
+                                            class="form-label text-muted small fw-bold d-flex justify-content-between">
+                                            Password
+                                            <a href="#" class="text-decoration-none text-primary fw-normal"
+                                                onclick="alert('Mock Forgot Password triggered.')">Forgot?</a>
+                                        </label>
+                                        <input type="password" class="form-control rounded-3 bg-light border-0 py-2"
+                                            id="loginPassword" required>
+                                    </div>
+                                    <button type="submit"
+                                        class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm">Login</button>
+                                    <div id="loginError" class="text-danger small mt-2 text-center d-none"></div>
+                                </form>
+                            </div>
+
+                            <!-- Sign Up Form -->
+                            <div class="tab-pane fade" id="signup-pane" role="tabpanel" aria-labelledby="signup-tab">
+                                <form id="signupForm">
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted small fw-bold">Full Name</label>
+                                        <input type="text" class="form-control rounded-3 bg-light border-0 py-2"
+                                            id="signupName" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label text-muted small fw-bold">Email address</label>
+                                        <input type="email" class="form-control rounded-3 bg-light border-0 py-2"
+                                            id="signupEmail" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label text-muted small fw-bold">Password</label>
+                                        <input type="password" class="form-control rounded-3 bg-light border-0 py-2"
+                                            id="signupPassword" required minlength="6">
+                                    </div>
+                                    <button type="submit"
+                                        class="btn btn-primary w-100 rounded-pill py-2 fw-bold shadow-sm">Create
+                                        Account</button>
+                                    <div id="signupError" class="text-danger small mt-2 text-center d-none"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap Bundle JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/script.js"></script>
+
+        <!-- PWA Service Worker Registration -->
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js')
+                        .then(reg => console.log('Service Worker Registered!', reg))
+                        .catch(err => console.error('Service Worker Registration Failed!', err));
+                });
+            }
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Assistant Chatbot | AI-Powered Healthcare</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <div
+                    class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-3 p-2 me-2">
+                    <i class="fa-solid fa-notes-medical" style="color: var(--primary-color);"></i>
+                </div>
+                Salvia AI
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars fs-4 text-primary"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/chatbot.html">AI Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/map.html">Find Hospitals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 flex-grow-1">
+        <!-- Safety Disclaimer -->
+        <div class="disclaimer-banner">
+            <div class="disclaimer-icon-badge">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div>
+                <strong>Important:</strong> This tool is for informational purposes only. It does NOT provide medical
+                diagnosis, treatment advice, or replace professional healthcare consultation.
+            </div>
+        </div>
+
+        <!-- Background Shapes -->
+        <div class="bg-shape bg-shape-1"></div>
+        <div class="bg-shape bg-shape-2"></div>
+
+        <!-- Hero Section -->
+        <div class="row align-items-center min-vh-50 py-5 pb-5 position-relative z-1">
+            <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
+                <h1 class="display-4 fw-bolder mb-4" style="line-height: 1.15; letter-spacing: -0.03em;">
+                    Your AI-Powered <br>
+                    <span class="text-gradient">Healthcare Assistant</span>
+                </h1>
+                <p class="lead text-muted mb-5 fs-5 fw-normal">
+                    Get instant health answers, find nearby medical facilities, and scan your medications using advanced
+                    artificial intelligence—all in one intuitive platform.
+                </p>
+                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                    <a href="/chatbot.html" class="btn btn-primary-custom btn-lg d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-robot"></i> Try Salvia
+                    </a>
+                    <a href="/map.html" class="btn btn-outline-primary btn-lg d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-location-dot"></i> Find Hospital
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <!-- Live Chatbot Preview Widget -->
+                <div class="position-relative d-flex justify-content-center py-3">
+                    <a href="/chatbot.html" class="chat-preview-widget animate-float shadow-lg text-decoration-none"
+                        style="color: inherit; cursor: pointer; transition: transform 0.3s ease;">
+
+                        <!-- Header -->
+                        <div class="chat-preview-header">
+                            <div class="preview-avatar">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0 fw-bold" style="font-size: 0.95rem; color: var(--text-main);">Salvia AI
+                                </h6>
+                                <p class="mb-0"
+                                    style="font-size: 0.75rem; color: var(--secondary-color); font-weight: 500;"><i
+                                        class="fa-solid fa-circle" style="font-size: 0.4rem;"></i> Online</p>
+                            </div>
+                        </div>
+
+                        <!-- Chat Body -->
+                        <div class="chat-preview-body scrollbar-none">
+
+                            <!-- Bot Message 1 -->
+                            <div class="preview-bubble-wrapper bot delay-1">
+                                <div class="preview-avatar bg-light border text-primary shadow-sm"
+                                    style="background: white !important;">
+                                    <i class="fa-solid fa-robot"></i>
+                                </div>
+                                <div class="preview-bubble bot">
+                                    Hello! How can I help you today?
+                                </div>
+                            </div>
+
+                            <!-- User Message -->
+                            <div class="preview-bubble-wrapper user delay-2">
+                                <div class="preview-bubble user">
+                                    I have a headache
+                                </div>
+                            </div>
+
+                            <!-- Typing Indicator (Disappears) -->
+                            <div class="preview-bubble-wrapper bot typing-bubble-wrapper">
+                                <div class="preview-avatar bg-light border text-primary shadow-sm"
+                                    style="background: white !important;">
+                                    <i class="fa-solid fa-robot"></i>
+                                </div>
+                                <div class="preview-bubble bot typing-preview">
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                </div>
+                            </div>
+
+                            <!-- Bot Message 2 -->
+                            <div class="preview-bubble-wrapper bot delay-4">
+                                <div class="preview-avatar bg-light border text-primary shadow-sm"
+                                    style="background: white !important;">
+                                    <i class="fa-solid fa-robot"></i>
+                                </div>
+                                <div class="preview-bubble bot">
+                                    Common causes include stress, dehydration, or lack of sleep. Stay hydrated and rest.
+                                    If symptoms persist, consult a doctor.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Footer Input -->
+                        <div class="chat-preview-footer">
+                            <div class="chat-preview-input">Type your message...</div>
+                            <div class="chat-preview-send shadow-sm"><i class="fa-solid fa-paper-plane"></i></div>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="row g-4 py-5 mt-2">
+            <div class="col-md-6 col-lg-4">
+                <div class="card glass-card h-100 p-4 border-0">
+                    <div class="card-body text-center d-flex flex-column">
+                        <div class="icon-box-primary mx-auto">
+                            <i class="fa-solid fa-message"></i>
+                        </div>
+                        <h4 class="card-title fw-bold mb-3">AI Health Chatbot</h4>
+                        <p class="card-text text-muted flex-grow-1">Ask common health questions, check symptoms, and get
+                            instantly retrieved information via advanced AI models.</p>
+                        <a href="/chatbot.html"
+                            class="text-primary text-decoration-none fw-semibold mt-3 d-inline-flex align-items-center justify-content-center gap-1">Start
+                            Chatting <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card glass-card h-100 p-4 border-0">
+                    <div class="card-body text-center d-flex flex-column">
+                        <div class="icon-box-success mx-auto">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <h4 class="card-title fw-bold mb-3">Hospital Locator</h4>
+                        <p class="card-text text-muted flex-grow-1">Use your browser's geolocation to instantly find and
+                            navigate to clinics, pharmacies, and hospitals nearby.</p>
+                        <a href="/map.html"
+                            class="text-secondary text-decoration-none fw-semibold mt-3 d-inline-flex align-items-center justify-content-center gap-1">Find
+                            Nearby <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card glass-card h-100 p-4 border-0">
+                    <div class="card-body text-center d-flex flex-column">
+                        <div class="icon-box-warning mx-auto">
+                            <i class="fa-solid fa-pills"></i>
+                        </div>
+                        <h4 class="card-title fw-bold mb-3">Medicine Scanner</h4>
+                        <p class="card-text text-muted flex-grow-1">Upload images of medication packaging to instantly
+                            identify the medicine, its uses, and precautions via OCR.</p>
+                        <a href="/chatbot.html"
+                            class="text-decoration-none fw-semibold mt-3 d-inline-flex align-items-center justify-content-center gap-1"
+                            style="color: #d97706;">Scan Medicine <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="mb-0 fw-medium">&copy; 2026 Salvia AI</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- PWA Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(reg => console.log('Service Worker Registered!', reg))
+                    .catch(err => console.error('Service Worker Registration Failed!', err));
+            });
+        }
+    </script>
+</body>
+
+</html>
