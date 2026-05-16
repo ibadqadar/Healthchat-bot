@@ -18,12 +18,12 @@
 
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
                 <div
-                    class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-3 p-2 me-2">
-                    <i class="fa-solid fa-notes-medical" style="color: var(--primary-color);"></i>
+                    class="d-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-3 p-2">
+                    <i class="fa-solid fa-heart-pulse" style="color: var(--primary-color);"></i>
                 </div>
-                Salvia AI
+                <span class="fw-bold fs-4" style="letter-spacing: -0.01em;">Salvia AI</span>
             </a>
             <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav">
@@ -44,60 +44,44 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="glass-card p-4 p-md-5">
-                    <h2 class="fw-bolder mb-3 text-gradient">About the Project</h2>
-                    <p class="lead text-muted fs-5">A comprehensive project aiming to make basic healthcare information
-                        more accessible using Artificial Intelligence.</p>
+                    <h2 class="fw-bolder mb-3 text-gradient">About Us</h2>
+                    <p class="lead text-muted fs-5">Empowering individuals with instant, AI-driven healthcare insights and navigation.</p>
 
                     <hr class="my-5" style="opacity: 0.1;">
 
-                    <h4 class="fw-bold mb-4">Core Features</h4>
-                    <ul class="list-group list-group-flush mb-5 rounded-4 border overflow-hidden shadow-sm">
-                        <li class="list-group-item d-flex align-items-center gap-3 py-4 border-bottom-0">
-                            <div class="icon-box-primary mb-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
-                                <i class="fa-solid fa-robot"></i>
+                    <h4 class="fw-bold mb-4">Our Mission & Vision</h4>
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6">
+                            <div class="card glass-card h-100 p-4 border-0 shadow-sm" style="background: rgba(255, 255, 255, 0.6);">
+                                <div class="icon-box-primary mb-3">
+                                    <i class="fa-solid fa-bullseye"></i>
+                                </div>
+                                <h5 class="fw-bold text-primary mb-2">Our Mission</h5>
+                                <p class="small text-muted mb-0">To democratize healthcare information by providing a free, accessible, and intelligent assistant that helps users understand symptoms and locate medical care instantly.</p>
                             </div>
-                            <div>
-                                <strong class="d-block mb-1">AI Chatbot</strong>
-                                <span class="text-muted">Processes natural language queries to return relevant health
-                                    FAQs and system capabilities.</span>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card glass-card h-100 p-4 border-0 shadow-sm" style="background: rgba(255, 255, 255, 0.6);">
+                                <div class="icon-box-success mb-3">
+                                    <i class="fa-solid fa-eye"></i>
+                                </div>
+                                <h5 class="fw-bold text-success mb-2">Our Vision</h5>
+                                <p class="small text-muted mb-0">To become a trusted AI health companion, bridging the gap between individuals and healthcare providers through innovative, privacy-first technology.</p>
                             </div>
-                        </li>
-                        <li class="list-group-item d-flex align-items-center gap-3 py-4 border-bottom-0 border-top">
-                            <div class="icon-box-success mb-0" style="width: 48px; height: 48px; font-size: 1.25rem;">
-                                <i class="fa-solid fa-map-location-dot"></i>
-                            </div>
-                            <div>
-                                <strong class="d-block mb-1">Nearby Hospitals</strong>
-                                <span class="text-muted">Uses Geolocation combined with mapping APIs to locate nearby
-                                    healthcare facilities.</span>
-                            </div>
-                        </li>
-                        <li class="list-group-item d-flex align-items-center gap-3 py-4 border-top">
-                            <div class="mb-0 d-inline-flex align-items-center justify-content-center"
-                                style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.2)); color: #d97706; width: 48px; height: 48px; border-radius: 16px; font-size: 1.25rem; box-shadow: inset 0 2px 4px rgba(255,255,255,0.5);">
-                                <i class="fa-solid fa-pills"></i>
-                            </div>
-                            <div>
-                                <strong class="d-block mb-1">Medication OCR</strong>
-                                <span class="text-muted">Connects to Vision APIs to read text from uploaded medicine
-                                    images to provide precautions and uses.</span>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
 
-                    <h4 class="fw-bold mb-3">Datasets Used</h4>
-                    <p class="text-muted mb-5">Information in the chatbot and medicine database was curated from
-                        credible open sources such as the OpenFDA and WHO open datasets.</p>
-
-                    <h4 class="fw-bold mb-4">Tech Stack</h4>
-                    <div class="d-flex flex-wrap gap-2 mb-5">
-                        <span class="badge bg-slate-800 text-bg-dark px-3 py-2 rounded-pill fw-medium">Node.js</span>
-                        <span class="badge bg-slate-800 text-bg-dark px-3 py-2 rounded-pill fw-medium">Express</span>
-                        <span class="badge bg-slate-800 text-bg-dark px-3 py-2 rounded-pill fw-medium">MongoDB</span>
-                        <span class="badge bg-primary px-3 py-2 rounded-pill fw-medium">Google Gemini AI</span>
-                        <span class="badge text-bg-success px-3 py-2 rounded-pill fw-medium">OpenStreetMap API</span>
-                        <span class="badge text-bg-info text-white px-3 py-2 rounded-pill fw-medium">Vanilla CSS</span>
-                        <span class="badge text-bg-secondary px-3 py-2 rounded-pill fw-medium">Bootstrap 5</span>
+                    <h4 class="fw-bold mb-4">Privacy & Security Commitment</h4>
+                    <div class="card glass-card p-4 border-0 shadow-sm mb-5" style="background: rgba(var(--primary-rgb), 0.05); border-radius: 20px;">
+                        <div class="d-flex gap-4 align-items-center">
+                            <div class="icon-box-primary flex-shrink-0 mb-0" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold mb-2">Your Data, Your Privacy</h5>
+                                <p class="small text-muted mb-0">At Salvia, we take your privacy seriously. All health queries are processed through secure, encrypted channels. We do not store sensitive medical history permanently, and your chat data is never sold to third-party advertisers. We are committed to maintaining the highest standards of data integrity and user anonymity.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="alert alert-info mt-4 pb-3 border-0 shadow-sm"

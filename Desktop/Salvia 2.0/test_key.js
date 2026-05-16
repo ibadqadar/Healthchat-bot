@@ -3,7 +3,7 @@ const axios = require('axios');
 const key = process.env.GEMINI_API_KEY;
 
 async function run() {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${key}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${key}`;
     try {
         const res = await axios.post(url, {
             contents: [{ parts: [{ text: 'Say hi.' }] }]

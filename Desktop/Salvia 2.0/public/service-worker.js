@@ -1,4 +1,4 @@
-const CACHE_NAME = 'salvia-ai-cache-v2';
+const CACHE_NAME = 'salvia-ai-cache-v10';
 const STATIC_ASSETS = [
     '/',
     '/index.html',

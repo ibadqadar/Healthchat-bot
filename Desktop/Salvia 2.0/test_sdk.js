@@ -4,7 +4,7 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 async function testSDK() {
     try {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite" });
         const result = await model.generateContent("Just reply with the word 'Hello'");
         console.log("SUCCESS:", result.response.text());
     } catch (e) {
